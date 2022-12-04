@@ -11,4 +11,9 @@ class SeriesController extends Controller
         $series = [1 => 'Serie 1', 2 => 'Serie 2', 3 => 'Serie 3'];
         return view('series.index')->with('series', $series);
     }
+
+    public function create()
+    {
+        return view('series.create');
+    }
 }
