@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $series = Serie::all();
-        return view('series.index')->with('series', $series);
+        $mensagemSucesso = session('mensagem.sucesso');
+
+        return view('series.index')
+            ->with('series', $series)
+            ->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create()
@@ -20,15 +24,17 @@ class SeriesController extends Controller
 
     public function store(Request $request)
     {
-        Serie::create($request->all());
+        $serie = Serie::create($request->all());
         
-        return to_route('series.index');
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso!");
     }
 
-    public function destroy(Request $request)
+    public function destroy(Serie $series, Request $request)
     {
-        Serie::destroy($request->series);
+        $series->delete();
 
-        return to_route('series.index');
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso!");
     }
 }
