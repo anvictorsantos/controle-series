@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedTinyInteger('number');
             $table->foreignId('season_id')->constrained()->onDelete('cascade');
+            $table->boolean('watched')->default(false);
         });
     }
 
