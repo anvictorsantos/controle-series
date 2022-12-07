@@ -1,6 +1,5 @@
 <?php
 
-use App\Providers\SeriesRepositoryProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
